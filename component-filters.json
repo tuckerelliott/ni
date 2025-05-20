@@ -8,27 +8,15 @@
   {
     "id": "section",
     "components": [
-      "accordion",
-      "cards",
-      "carousel",
-      "columns",
-      "embed",
-      "fragment",
-      "form",
-      "hero",
-      "image",
-      "quote",
-      "search",
-      "tabs",
-      "table",
       "text",
-      "video"
-    ]
-  },
-  {
-    "id": "accordion",
-    "components": [
-      "accordion-item"
+      "image",
+      "button",
+      "title",
+      "hero",
+      "cards",
+      "columns",
+      "fragment",
+      "video-banner"
     ]
   },
   {
@@ -38,15 +26,20 @@
     ]
   },
   {
-    "id": "carousel",
+    "id": "columns",
     "components": [
-      "carousel-item"
+      "column",
+      "video-banner"
     ]
   },
   {
-    "id": "tabs",
+    "id": "column",
     "components": [
-      "tabs-item"
+      "text",
+      "image",
+      "button",
+      "title",
+      "video-banner"
     ]
   }
 ]

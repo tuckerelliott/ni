@@ -1,0 +1,5 @@
+<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <path class="header-icon" stroke="#044123" stroke-width="2.29" fill="none" d="M4.71,21.73H20.52A9.72,9.72,0,0,0,30.24,12V8.24H4.71V21.73Z" transform="translate(-3.56 -3.71)" />
+  <path class="header-icon" stroke="#044123" stroke-width="2.29" fill="none" d="M9.06,21.47v2.11a2.44,2.44,0,0,0,2.4,2.47H25.67M4.48,4.86H6.65A2.44,2.44,0,0,1,9.06,7.33V8.47" transform="translate(-3.56 -3.71)" />
+  <path class="header-icon" stroke="#044123" stroke-width="2.29" fill="none" d="M21.58,29.18A1.2,1.2,0,1,0,22.78,28,1.2,1.2,0,0,0,21.58,29.18Zm-10.51,0A1.21,1.21,0,1,0,12.27,28,1.2,1.2,0,0,0,11.07,29.18Z" transform="translate(-3.56 -3.71)" />
+</svg>
