@@ -21,9 +21,6 @@ export default async function decorate(block) {
 
   Array.from(Object.entries(footerLinks)).forEach(
     ([heading, links], i, arr) => {
-      console.log('heading :>> ', heading);
-      console.log('links :>> ', links);
-
       const column = document.createElement('div');
 
       const headingEl = document.createElement('p');
@@ -36,9 +33,6 @@ export default async function decorate(block) {
       navLinks.classList.add('nav-links');
 
       links.forEach(({ title, link }) => {
-        console.log('title :>> ', title);
-        console.log('link :>> ', link);
-
         const linkEl = document.createElement('a');
         linkEl.href = link;
         linkEl.innerText = title;
