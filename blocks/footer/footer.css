@@ -1,20 +1,244 @@
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  background-color: #044123;
+  font-family: var(--footer-font-family);
+  box-sizing: border-box;
 }
 
-footer .footer > div {
+footer .block {
+  padding-top: 75px;
+  max-width: 1440px;
   margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+  padding: 75px 30px 0 30px;
 }
 
-footer .footer p {
-  margin: 0;
+footer .footer-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-weight: normal;
+
+  & .logo-block {
+    display: flex;
+    justify-content: center;
+    flex: 3;
+  }
+
+  & .logo {
+    width: 154px;
+    object-fit: contain;
+  }
+
+  & .heading {
+    margin-top: 0;
+    line-height: 1.5;
+  }
+
+  & > div {
+    flex: 2;
+  }
+
+  & > div:first-child,
+  & > div:last-child {
+    flex: 3;
+  }
+
+  & > .logo-block {
+    justify-self: center;
+    width: 100%;
+  }
+
+  & a {
+    font-size: 19px;
+    display: block;
+    padding-bottom: 13px;
+    line-height: 2.5px;
+    margin-bottom: 0px;
+  }
+
+  & .social-links {
+    display: flex;
+    margin-top: 38px;
+    font-size: 15px;
+  }
+
+  & .social-links a {
+    padding-right: 14px;
+    text-decoration: none;
+  }
+
+  & .social-links a:last-child {
+    padding-right: 0;
+  }
 }
 
-@media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+footer .footer-bottom {
+  padding: 60px 0 40px 0;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 12px;
+
+  & a {
+    font-family: 'Space Mono';
+    font-size: 12px;
+    line-height: 14px;
+    text-decoration: none;
+  }
+
+  & .gateway-legal {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    order: 3;
+    flex-wrap: wrap;
+  }
+
+  & .global-gateway {
+    order: 2;
+    text-transform: capitalize;
+  }
+
+  & .global-gateway-icon {
+    margin-right: 21px;
+  }
+
+  & .legal {
+    order: 1;
+    display: flex;
+    margin: 0 25px 0 0;
+
+    a {
+      display: flex;
+    }
+
+    & a:not(:last-child)::after {
+      content: ' | ';
+      display: inline-block;
+      width: 36px;
+      text-align: center;
+    }
+  }
+
+  & .allRights {
+    color: #f6f6f6;
+    font-family: 'Space Mono';
+    font-size: 12px;
+    line-height: 14px;
+    text-decoration: none;
+    max-width: 450px;
+    order: 1;
+  }
+
+  & .contact-number {
+    font-size: 12px;
+    order: 2;
+  }
+}
+
+footer .footer a {
+  color: #32eb96;
+}
+
+footer .footer .heading {
+  text-transform: capitalize;
+  color: #f6f6f6;
+  font-size: 18px;
+  letter-spacing: -0.04px;
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
+footer .footer .nav-links {
+  display: block;
+  line-height: 1.15;
+
+  & a + a::before {
+    padding: 8px;
+    color: #32eb96;
+    content: '/ ';
+  }
+
+  a {
+    display: inline;
+    padding: 0;
+  }
+}
+
+@media (min-width: 1120px) {
+  footer .footer-top {
+    flex-direction: row;
+    gap: 11.25px;
+    padding-left: 11.25px;
+    padding-right: 11.25px;
+
+    & .logo-block {
+      justify-self: unset;
+    }
+
+    & .social-links {
+      margin-top: 45px;
+    }
+  }
+
+  footer .footer-top a {
+    line-height: 1.5;
+  }
+
+  footer .footer .heading {
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 44px;
+  }
+
+  footer .footer .nav-links {
+    display: flex;
+    flex-direction: column;
+
+    & a + a::before {
+      content: none;
+    }
+
+    a {
+      padding-bottom: 13px;
+    }
+  }
+
+  footer .footer .footer-bottom {
+    padding: 54px 11.25px 120px 11.25px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+    .global-gateway {
+      text-transform: uppercase;
+    }
+
+    & .gateway-legal,
+    & .global-gateway {
+      order: 1;
+    }
+
+    .legal {
+      margin: 0 25px;
+    }
+
+    & .contact-number {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  footer .footer-top .social-links {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 1275px) {
+  footer .footer-top a {
+    font-size: 14px;
+    line-height: 1.5;
+    gap: 22.5px;
   }
 }
