@@ -40,6 +40,7 @@ function openOnKeydown(e) {
   const focused = document.activeElement;
   const isNavDrop = focused.className === 'nav-drop';
   if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
+    e.preventDefault(); // Prevent default action for Space key
     const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
     // eslint-disable-next-line no-use-before-define
     toggleAllNavSections(focused.closest('.nav-sections'));
@@ -75,6 +76,8 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
+  button.setAttribute('aria-expanded', expanded ? 'false' : 'true'); // Sync button state with nav
+
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
   if (isDesktop.matches) {
@@ -117,6 +120,7 @@ export default async function decorate(block) {
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
+  nav.setAttribute('aria-label', 'Main navigation'); // Add landmark label
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
   const classes = ['brand', 'sections', 'tools'];
@@ -127,9 +131,18 @@ export default async function decorate(block) {
 
   const navBrand = nav.querySelector('.nav-brand');
   const brandLink = navBrand.querySelector('.button');
+    const brandAnchor = navBrand.querySelector('a');
+
+    const logo = document.createElement('img');
+    logo.src = navBrand.innerText;
+    brandAnchor.innerText = '';
+    brandAnchor.append(logo);
   if (brandLink) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
+    if (!brandLink.hasAttribute('title')) {
+      brandLink.setAttribute('title', 'Go to homepage'); // SEO-friendly link title
+    }
   }
 
   const navSections = nav.querySelector('.nav-sections');
@@ -149,10 +162,9 @@ export default async function decorate(block) {
   // hamburger for mobile
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
-  hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
-      <span class="nav-hamburger-icon"></span>
+  hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation" aria-expanded="false">
+      <span class="nav-hamburger-icon" aria-hidden="true"></span>
     </button>`;
-  // hamburger.addEventListener('click', () => toggleMenu(nav, navSections)); #disabled toggleMenu
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
   // prevent mobile nav behavior on window resize

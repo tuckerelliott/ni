@@ -15,14 +15,15 @@
   overflow: visible;
   padding-bottom: 0;
   padding-top: 0;
+  
+  .image-block {
+    display: flex;
+    margin-bottom: 20px;
+  }
 }
 
-.image-block {
-  display: flex;
-  margin-bottom: 20px;
-}
 
-.info-block {
+.media-info .info-block {
   margin-top: -23%;
   box-sizing: border-box;
 
@@ -51,14 +52,14 @@
   }
 }
 
-.info-wrapper {
+.media-info .info-wrapper {
   border-top: 1px solid var(--forrest-green);
   border-bottom: 1px solid var(--forrest-green);
   padding: 31px 0;
 }
 
 @media (max-width: 1199px) {
-  .info-block {
+  .media-info .info-block {
     max-width: 473px;
 
     .title {
@@ -75,7 +76,7 @@
 }
 
 @media (max-width: 1023px) {
-  .info-block {
+  .media-info .info-block {
     position: static;
     margin: 0;
     max-width: 100%;
@@ -94,7 +95,7 @@
 }
 
 @media (max-width: 719px) {
-  .info-block {
+  .media-info .info-block {
     padding: 32px 22px;
 
     .title {
