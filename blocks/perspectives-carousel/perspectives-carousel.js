@@ -28,10 +28,18 @@ export default async function decorate(block) {
     const bullets = document.createElement('div');
     bullets.classList.add('carousel-bullets');
     bullets.innerHTML = `<div class="bullets">
-            <button class="bullet"></button>
-            <button class="bullet"></button>       
-            <button class="bullet"></button>       
-            <button class="bullet"></button>
+            <button class="bullet active" data-index="1" data-slide="${
+              i + 1
+            }"></button>
+            <button class="bullet" data-index="2" data-slide="${
+              i + 1
+            }"></button>       
+            <button class="bullet" data-index="3" data-slide="${
+              i + 1
+            }"></button>       
+            <button class="bullet" data-index="4" data-slide="${
+              i + 1
+            }"></button>
     </div>`;
 
     const textBlock = document.createElement('div');
@@ -97,6 +105,7 @@ export function decorateCarousel() {
   const carousel = document.querySelector('ul.carousel');
   const prevBtn = document.querySelector('#left');
   const nextBtn = document.querySelector('#right');
+  const bulletButtons = document.querySelectorAll('.carousel-bullets button');
   let slides = Array.from(carousel.children);
   const totalCards = slides.length;
   const slideWidth = slides[0].offsetWidth;
@@ -105,7 +114,6 @@ export function decorateCarousel() {
   let isDragging = false;
   let startX = 0;
   let currentTranslate = 0;
-  let prevTranslate = 0;
   let animationID;
 
   slides[0].classList.add('active');
@@ -185,8 +193,12 @@ export function decorateCarousel() {
   prevBtn.addEventListener('click', goToPrev);
 
   // Drag functionality
-  function touchStart(index) {
+  function touchStart() {
     return function (event) {
+      if (event.target.classList.contains('bullet')) {
+        return;
+      }
+
       isDragging = true;
       startX = event.type.includes('mouse')
         ? event.pageX
@@ -197,6 +209,10 @@ export function decorateCarousel() {
   }
 
   function touchMove(event) {
+    if (event.target.classList.contains('bullet')) {
+      return;
+    }
+
     if (!isDragging) return;
     const currentX = event.type.includes('mouse')
       ? event.pageX
@@ -205,7 +221,20 @@ export function decorateCarousel() {
     currentTranslate = -currentIndex * carousel.offsetWidth + diff;
   }
 
-  function touchEnd() {
+  function touchEnd(event) {
+    if (event.target.classList.contains('bullet')) {
+      bulletButtons.forEach(btn => btn.classList.remove('active'));
+      const bulletIndex = +event.target.getAttribute('data-index');
+      bulletButtons.forEach(btn => {
+        if (+btn.getAttribute('data-index') === bulletIndex) {
+          btn.classList.add('active');
+        }
+      });
+
+      setSlide(bulletIndex);
+      return;
+    }
+
     cancelAnimationFrame(animationID);
     isDragging = false;
     const movedBy = currentTranslate + currentIndex * carousel.offsetWidth;
@@ -242,6 +271,6 @@ export function decorateCarousel() {
   window.addEventListener('resize', () => {
     // Disable transition so resize snap is instant and smooth
     carousel.style.transition = 'none';
-    carousel.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+    carousel.style.transform = `translateX(-${currentIndex * carousel.offsetWidth}px)`;
   });
 }
