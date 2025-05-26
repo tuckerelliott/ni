@@ -301,3 +301,7 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+main .section.test-and-measurement {
+    background-color: #f4f4f4;
+}
