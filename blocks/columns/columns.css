@@ -88,14 +88,6 @@
     display: flex;
   }
 
-  .columns.block.columns-2-cols > div h2 + p {
-    display: none;
-  }
-
-  .columns.block.columns-2-cols .columns-scene7-col h1 + p {
-    display: none;
-  }
-
   .columns > div > .columns-img-col img {
     display: unset;
   }
