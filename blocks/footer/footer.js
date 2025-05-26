@@ -69,7 +69,7 @@ export default async function decorate(block) {
       }
 
       footerTop.append(column);
-    }
+    },
   );
 
   const footerBottom = document.createElement('div');

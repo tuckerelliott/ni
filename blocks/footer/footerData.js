@@ -33,7 +33,7 @@ export const footerLinks = {
       link: 'https://www.ni.com/en/solutions/transportation.html',
     },
   ],
-    orders: [
+  orders: [
     {
       title: 'NI Distribution Partners',
       link: 'https://www.ni.com/en/partners/distributors.html',
@@ -53,7 +53,7 @@ export const footerLinks = {
     {
       title: 'Order by Part Number or Request a Quote',
       link: 'https://sine.ni.com/apps/utf8/nios.store?action=view_cart',
-    }
+    },
   ],
   company: [
     {
@@ -79,7 +79,7 @@ export const footerLinks = {
     {
       title: 'Events',
       link: 'https://www.ni.com/en/events.html',
-    }
+    },
   ],
   support: [
     {
@@ -105,6 +105,6 @@ export const footerLinks = {
     {
       title: 'Site Feedback',
       link: 'https://survey.ni.com/jfe/form/SV_daMuCfO1or7M5HD?Q_Language=EN',
-    }
+    },
   ],
 };

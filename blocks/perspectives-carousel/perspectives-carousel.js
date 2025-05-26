@@ -30,17 +30,17 @@ export default async function decorate(block) {
     bullets.classList.add('carousel-bullets');
     bullets.innerHTML = `<div class="bullets">
             <button class="bullet active" data-index="1" data-slide="${
-              i + 1
-            }" aria-label="Slide 1"></button>
+  i + 1
+}" aria-label="Slide 1"></button>
             <button class="bullet" data-index="2" data-slide="${
-              i + 1
-            }" aria-label="Slide 2"></button>       
+  i + 1
+}" aria-label="Slide 2"></button>       
             <button class="bullet" data-index="3" data-slide="${
-              i + 1
-            }" aria-label="Slide 3"></button>       
+  i + 1
+}" aria-label="Slide 3"></button>       
             <button class="bullet" data-index="4" data-slide="${
-              i + 1
-            }" aria-label="Slide 4"></button>
+  i + 1
+}" aria-label="Slide 4"></button>
     </div>`;
 
     const textBlock = document.createElement('div');
@@ -65,7 +65,7 @@ export default async function decorate(block) {
     ctaSpan.innerText = slide.linkTitle;
     cta.append(ctaSpan);
     cta.href = slide.linkHref;
-    cta.title = `Follow this link to ${cta.innerText.toLowerCase()}`
+    cta.title = `Follow this link to ${cta.innerText.toLowerCase()}`;
     cta.classList.add('cta', 'button');
     textBlock.append(cta);
 
@@ -138,7 +138,7 @@ export function decorateCarousel() {
       .toString()
       .padStart(
         2,
-        '0'
+        '0',
       )}</span><span class="total-slides"> <span class="divider">/</span> <span class="total-slides">${totalCards
       .toString()
       .padStart(2, '0')}</span>`;
@@ -169,7 +169,7 @@ export function decorateCarousel() {
         carousel.style.transform = `translateX(-${
           slideWidth * currentIndex
         }px)`;
-        slides.forEach(slide => slide.classList.remove('active'));
+        slides.forEach((slide) => slide.classList.remove('active'));
 
         slides[currentIndex].classList.add('active');
       });
@@ -181,12 +181,12 @@ export function decorateCarousel() {
         carousel.style.transform = `translateX(-${
           slideWidth * currentIndex
         }px)`;
-        slides.forEach(slide => slide.classList.remove('active'));
+        slides.forEach((slide) => slide.classList.remove('active'));
 
         slides[currentIndex].classList.add('active');
       });
     } else {
-      slides.forEach(slide => slide.classList.remove('active'));
+      slides.forEach((slide) => slide.classList.remove('active'));
       slides[currentIndex].classList.add('active');
     }
   });
@@ -225,9 +225,9 @@ export function decorateCarousel() {
 
   function touchEnd(event) {
     if (event.target.classList.contains('bullet')) {
-      bulletButtons.forEach(btn => btn.classList.remove('active'));
+      bulletButtons.forEach((btn) => btn.classList.remove('active'));
       const bulletIndex = +event.target.getAttribute('data-index');
-      bulletButtons.forEach(btn => {
+      bulletButtons.forEach((btn) => {
         if (+btn.getAttribute('data-index') === bulletIndex) {
           btn.classList.add('active');
         }

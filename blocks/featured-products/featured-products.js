@@ -1,12 +1,12 @@
 /* eslint-disable no-lonely-if */
 export default async function decorate(block) {
-  [...block.children].forEach(child => {
+  [...block.children].forEach((child) => {
     const link = child.querySelector('p > a');
     const imgWrapper = document.createElement('div');
     imgWrapper.classList.add('img-wrapper');
     const img = document.createElement('img');
     img.src = link.innerText;
-    img.alt = "Product image";
+    img.alt = 'Product image';
     imgWrapper.append(img);
     link.parentNode.replaceWith(imgWrapper);
 
@@ -21,28 +21,26 @@ export default async function decorate(block) {
 
   const container = block.parentElement.parentElement;
   const defaultContentWrappers = container.querySelectorAll(
-    '.default-content-wrapper'
+    '.default-content-wrapper',
   );
   const lastWrapper = defaultContentWrappers[defaultContentWrappers.length - 1];
   const featuredProductsWrapper = container.querySelector(
-    '.featured-products-wrapper .featured-products'
+    '.featured-products-wrapper .featured-products',
   );
 
   let isExpanded = false;
 
   const applyDisplayState = () => {
-    const isCarouselViewport =
-      window.innerWidth >= 1024 && window.innerWidth <= 1200;
-    const productDivs =
-      featuredProductsWrapper.querySelectorAll(':scope > div');
+    const isCarouselViewport = window.innerWidth >= 1024 && window.innerWidth <= 1200;
+    const productDivs = featuredProductsWrapper.querySelectorAll(':scope > div');
 
     if (isCarouselViewport) {
-      productDivs.forEach(div => {
+      productDivs.forEach((div) => {
         div.style.display = '';
       });
     } else {
       if (isExpanded) {
-        productDivs.forEach(div => {
+        productDivs.forEach((div) => {
           div.style.display = '';
         });
       } else {
@@ -54,14 +52,12 @@ export default async function decorate(block) {
   };
 
   const setupCarousel = () => {
-    const isCarouselViewport =
-      window.innerWidth >= 1024 && window.innerWidth <= 1200;
+    const isCarouselViewport = window.innerWidth >= 1024 && window.innerWidth <= 1200;
 
     if (isCarouselViewport) {
       if (!container.querySelector('.carousel-navigation')) {
-        const productDivs =
-          featuredProductsWrapper.querySelectorAll(':scope > div');
-        productDivs.forEach(div => {
+        const productDivs = featuredProductsWrapper.querySelectorAll(':scope > div');
+        productDivs.forEach((div) => {
           div.style.display = '';
         });
 
@@ -100,7 +96,7 @@ export default async function decorate(block) {
         });
 
         // A11y: Add keyboard navigation for carousel
-        featuredProductsWrapper.addEventListener('keydown', event => {
+        featuredProductsWrapper.addEventListener('keydown', (event) => {
           if (event.key === 'ArrowLeft') {
             event.preventDefault();
             prevBtn.click();
@@ -115,7 +111,7 @@ export default async function decorate(block) {
         featuredProductsWrapper.setAttribute('role', 'region');
         featuredProductsWrapper.setAttribute(
           'aria-label',
-          'Featured Products Carousel'
+          'Featured Products Carousel',
         );
       }
     } else {
@@ -138,8 +134,8 @@ export default async function decorate(block) {
   if (lastWrapper && featuredProductsWrapper) {
     const showMoreParagraph = lastWrapper.querySelector('p');
     if (
-      showMoreParagraph &&
-      showMoreParagraph.textContent.trim() === 'Show more'
+      showMoreParagraph
+      && showMoreParagraph.textContent.trim() === 'Show more'
     ) {
       const symbolSpan = document.createElement('span');
       symbolSpan.textContent = ' +';
@@ -180,7 +176,7 @@ export default async function decorate(block) {
       showMoreParagraph.addEventListener('click', toggleShowMore);
 
       // A11y: Keyboard support for show more
-      showMoreParagraph.addEventListener('keydown', event => {
+      showMoreParagraph.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
           toggleShowMore();
@@ -212,11 +208,11 @@ export default async function decorate(block) {
       card.setAttribute('role', 'button');
       card.setAttribute(
         'aria-label',
-        `Navigate to ${linkText || 'product page'}`
+        `Navigate to ${linkText || 'product page'}`,
       );
 
       // A11y: Keyboard navigation for cards
-      card.addEventListener('keydown', event => {
+      card.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
           window.location.href = url;
@@ -235,7 +231,7 @@ export default async function decorate(block) {
     }
   });
 
-  block.addEventListener('click', event => {
+  block.addEventListener('click', (event) => {
     const clickedCard = event.target.closest('.clickable-card');
 
     if (clickedCard && clickedCard.dataset.href) {
@@ -255,7 +251,7 @@ export default async function decorate(block) {
   if (mainHeading && featuredProductsWrapper) {
     featuredProductsWrapper.setAttribute(
       'aria-labelledby',
-      'featured-products'
+      'featured-products',
     );
   }
 
@@ -270,7 +266,7 @@ export default async function decorate(block) {
     }
 
     const products = [];
-    productCards.forEach(card => {
+    productCards.forEach((card) => {
       const title = card.querySelector('h2');
       const description = card.querySelector('p:not(.show-more)');
       const url = card.dataset.href;

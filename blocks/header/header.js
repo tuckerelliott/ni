@@ -131,13 +131,13 @@ export default async function decorate(block) {
 
   const navBrand = nav.querySelector('.nav-brand');
   const brandLink = navBrand.querySelector('.button');
-    const brandAnchor = navBrand.querySelector('a');
+  const brandAnchor = navBrand.querySelector('a');
 
-    const logo = document.createElement('img');
-    logo.src = navBrand.innerText;
-    logo.alt = "NI logo"
-    brandAnchor.innerText = '';
-    brandAnchor.append(logo);
+  const logo = document.createElement('img');
+  logo.src = navBrand.innerText;
+  logo.alt = 'NI logo';
+  brandAnchor.innerText = '';
+  brandAnchor.append(logo);
   if (brandLink) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';

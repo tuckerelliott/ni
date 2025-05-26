@@ -5,9 +5,8 @@ export default function decorate(block) {
   imageBlock.classList.add('image-block');
 
   const image = document.createElement('img');
-  image.src =
-    'https://ni.scene7.com/is/image/ni/259204_Company-Campaign_performance_graphic?scl=1';
-  image.alt = "Performance graphic";
+  image.src = 'https://ni.scene7.com/is/image/ni/259204_Company-Campaign_performance_graphic?scl=1';
+  image.alt = 'Performance graphic';
   imageBlock.append(image);
   mediaInfoBlock.append(imageBlock);
 
@@ -24,14 +23,12 @@ export default function decorate(block) {
 
   const description = document.createElement('p');
   description.classList.add('description');
-  description.innerText =
-    'Unlocking the full benefits of test isn’t just about using a better tool. It requires an intentional strategy with automation, standardization, and digital transformation initiatives.';
+  description.innerText = 'Unlocking the full benefits of test isn’t just about using a better tool. It requires an intentional strategy with automation, standardization, and digital transformation initiatives.';
   infoWrapper.append(description);
 
   const cta = document.createElement('a');
   cta.classList.add('cta', 'button');
-  cta.href =
-    'https://www.ni.com/en/about-ni/improve-performance-through-test.html';
+  cta.href = 'https://www.ni.com/en/about-ni/improve-performance-through-test.html';
   cta.innerText = 'Learn how';
   infoWrapper.append(cta);
 

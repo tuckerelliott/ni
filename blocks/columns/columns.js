@@ -8,8 +8,8 @@ export default function decorate(block) {
   block.classList.add(`columns-${cols.length}-cols`);
 
   // Process each row and column
-  [...block.children].forEach(row => {
-    [...row.children].forEach(col => {
+  [...block.children].forEach((row) => {
+    [...row.children].forEach((col) => {
       // Original image column handling
       const pic = col.querySelector('picture');
       if (pic) {
@@ -21,7 +21,7 @@ export default function decorate(block) {
 
       // Scene7 URL handling - now using <img>
       const links = col.querySelectorAll('a[href*="scene7.com"]');
-      links.forEach(link => {
+      links.forEach((link) => {
         const url = link.href;
         const container = document.createElement('div');
         container.classList.add('scene7-container');
@@ -45,7 +45,7 @@ export default function decorate(block) {
 
       const linkAchors = col.querySelectorAll('.button-container a');
       linkAchors.forEach(
-        link => (link.title = `Follow this link to ${link.innerText.toLowerCase()}`)
+        (link) => (link.title = `Follow this link to ${link.innerText.toLowerCase()}`),
       );
     });
 
@@ -199,46 +199,38 @@ export default function decorate(block) {
       const DESKTOP_VIEWPORT_WIDTH = 1200;
 
       function manageItemVisibility(activeTabContent) {
-        tabContents.forEach(content => {
+        tabContents.forEach((content) => {
           const seeMoreBtn = content.querySelector('.ts-see-more');
           const allListItems = content.querySelectorAll('.ts-list-item');
-          allListItems.forEach(item =>
-            item.classList.remove('ts-hidden-by-default')
-          );
+          allListItems.forEach((item) => item.classList.remove('ts-hidden-by-default'));
 
           if (window.innerWidth < DESKTOP_VIEWPORT_WIDTH) {
             const listItemsToHide = Array.from(allListItems).slice(
-              MAX_ITEMS_MOBILE_INITIAL
+              MAX_ITEMS_MOBILE_INITIAL,
             );
             if (
-              content === activeTabContent &&
-              content.getAttribute('data-shown-all-mobile') !== 'true'
+              content === activeTabContent
+              && content.getAttribute('data-shown-all-mobile') !== 'true'
             ) {
-              listItemsToHide.forEach(item =>
-                item.classList.add('ts-hidden-by-default')
-              );
+              listItemsToHide.forEach((item) => item.classList.add('ts-hidden-by-default'));
               if (listItemsToHide.length > 0) {
                 seeMoreBtn.style.display = 'block';
               } else {
                 seeMoreBtn.style.display = 'none';
               }
             } else if (content !== activeTabContent) {
-              listItemsToHide.forEach(item =>
-                item.classList.add('ts-hidden-by-default')
-              );
+              listItemsToHide.forEach((item) => item.classList.add('ts-hidden-by-default'));
               seeMoreBtn.style.display = 'block';
               content.removeAttribute('data-shown-all-mobile');
             } else {
               seeMoreBtn.style.display = 'none';
             }
           } else {
-            allListItems.forEach(item =>
-              item.classList.remove('ts-hidden-by-default')
-            );
+            allListItems.forEach((item) => item.classList.remove('ts-hidden-by-default'));
             seeMoreBtn.style.display = 'none';
 
             const columns = activeTabContent.querySelectorAll('.ts-column');
-            columns.forEach(column => {
+            columns.forEach((column) => {
               const itemsInColumn = column.querySelectorAll('.ts-list-item');
               Array.from(itemsInColumn).forEach((item, index) => {
                 if (index >= MAX_ITEMS_PER_COLUMN_DESKTOP) {
@@ -252,16 +244,16 @@ export default function decorate(block) {
         });
       }
 
-      tabs.forEach(tab => {
+      tabs.forEach((tab) => {
         tab.addEventListener('click', function () {
-          tabs.forEach(t => t.classList.remove('active'));
-          tabContents.forEach(c => c.classList.remove('active'));
+          tabs.forEach((t) => t.classList.remove('active'));
+          tabContents.forEach((c) => c.classList.remove('active'));
 
           this.classList.add('active');
 
           const tabId = this.getAttribute('data-tab');
           const activeTabContent = document.querySelector(
-            `.ts-tab-content[data-tab="${tabId}"]`
+            `.ts-tab-content[data-tab="${tabId}"]`,
           );
           activeTabContent.classList.add('active');
 
@@ -269,12 +261,12 @@ export default function decorate(block) {
         });
       });
 
-      document.addEventListener('click', e => {
+      document.addEventListener('click', (e) => {
         if (e.target.classList.contains('ts-see-more')) {
           const tabContent = e.target.closest('.ts-tab-content');
           tabContent
             .querySelectorAll('.ts-list-item.ts-hidden-by-default')
-            .forEach(item => {
+            .forEach((item) => {
               item.classList.remove('ts-hidden-by-default');
             });
           e.target.style.display = 'none';
@@ -284,7 +276,7 @@ export default function decorate(block) {
 
       function checkViewportAndApplyVisibility() {
         const activeTabContent = document.querySelector(
-          '.ts-tab-content.active'
+          '.ts-tab-content.active',
         );
         if (activeTabContent) {
           manageItemVisibility(activeTabContent);
