@@ -29,7 +29,7 @@ export default function decorate(block) {
         // Direct image embed with size parameters
         const optimizedUrl = `${
           url.split('?')[0]
-        }?fit=constrain&wid=1200&hei=630`;
+        }?fmt=webp-alpha&scl=1&fit=constrain&wid=1200&hei=630`;
         container.innerHTML = `
           <img src="${optimizedUrl}" 
             class="scene7-image" 
@@ -42,6 +42,11 @@ export default function decorate(block) {
         link.parentNode.replaceChild(container, link);
         col.classList.add('columns-scene7-col');
       });
+
+      const linkAchors = col.querySelectorAll('.button-container a');
+      linkAchors.forEach(
+        link => (link.title = `Follow this link to ${link.innerText.toLowerCase()}`)
+      );
     });
 
     if (block.classList.contains('test-and-measurement')) {

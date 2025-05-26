@@ -65,6 +65,7 @@ export default async function decorate(block) {
     ctaSpan.innerText = slide.linkTitle;
     cta.append(ctaSpan);
     cta.href = slide.linkHref;
+    cta.title = `Follow this link to ${cta.innerText.toLowerCase()}`
     cta.classList.add('cta', 'button');
     textBlock.append(cta);
 
