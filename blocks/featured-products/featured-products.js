@@ -3,31 +3,45 @@ export default async function decorate(block) {
   [...block.children].forEach(child => {
     const link = child.querySelector('p > a');
     const imgWrapper = document.createElement('div');
-    imgWrapper.classList.add('img-wrapper')
+    imgWrapper.classList.add('img-wrapper');
     const img = document.createElement('img');
     img.src = link.innerText;
-    imgWrapper.append(img)
+    imgWrapper.append(img);
     link.parentNode.replaceWith(imgWrapper);
-  })
+
+    const cardTitle = child.querySelector('h2');
+    const cardWrapperLink = child.querySelector('h2 > a');
+    cardTitle.innerHTML = cardWrapperLink.innerText;
+    const hiddenLinkContainer = document.createElement('div');
+    hiddenLinkContainer.classList.add('hidden-link-container');
+    hiddenLinkContainer.innerHTML = `<p><a href="${cardWrapperLink.href}" title="${cardWrapperLink.href}">${cardWrapperLink.href}</a></p>`;
+    child.querySelector(':scope > div').prepend(hiddenLinkContainer);
+  });
 
   const container = block.parentElement.parentElement;
-  const defaultContentWrappers = container.querySelectorAll('.default-content-wrapper');
+  const defaultContentWrappers = container.querySelectorAll(
+    '.default-content-wrapper'
+  );
   const lastWrapper = defaultContentWrappers[defaultContentWrappers.length - 1];
-  const featuredProductsWrapper = container.querySelector('.featured-products-wrapper .featured-products');
+  const featuredProductsWrapper = container.querySelector(
+    '.featured-products-wrapper .featured-products'
+  );
 
   let isExpanded = false;
 
   const applyDisplayState = () => {
-    const isCarouselViewport = window.innerWidth >= 1024 && window.innerWidth <= 1200;
-    const productDivs = featuredProductsWrapper.querySelectorAll(':scope > div');
+    const isCarouselViewport =
+      window.innerWidth >= 1024 && window.innerWidth <= 1200;
+    const productDivs =
+      featuredProductsWrapper.querySelectorAll(':scope > div');
 
     if (isCarouselViewport) {
-      productDivs.forEach((div) => {
+      productDivs.forEach(div => {
         div.style.display = '';
       });
     } else {
       if (isExpanded) {
-        productDivs.forEach((div) => {
+        productDivs.forEach(div => {
           div.style.display = '';
         });
       } else {
@@ -39,12 +53,14 @@ export default async function decorate(block) {
   };
 
   const setupCarousel = () => {
-    const isCarouselViewport = window.innerWidth >= 1024 && window.innerWidth <= 1200;
+    const isCarouselViewport =
+      window.innerWidth >= 1024 && window.innerWidth <= 1200;
 
     if (isCarouselViewport) {
       if (!container.querySelector('.carousel-navigation')) {
-        const productDivs = featuredProductsWrapper.querySelectorAll(':scope > div');
-        productDivs.forEach((div) => {
+        const productDivs =
+          featuredProductsWrapper.querySelectorAll(':scope > div');
+        productDivs.forEach(div => {
           div.style.display = '';
         });
 
@@ -64,7 +80,9 @@ export default async function decorate(block) {
         carouselNav.appendChild(prevBtn);
         carouselNav.appendChild(nextBtn);
 
-        container.querySelector('.featured-products-wrapper').appendChild(carouselNav);
+        container
+          .querySelector('.featured-products-wrapper')
+          .appendChild(carouselNav);
 
         prevBtn.addEventListener('click', () => {
           featuredProductsWrapper.scrollBy({
@@ -81,7 +99,7 @@ export default async function decorate(block) {
         });
 
         // A11y: Add keyboard navigation for carousel
-        featuredProductsWrapper.addEventListener('keydown', (event) => {
+        featuredProductsWrapper.addEventListener('keydown', event => {
           if (event.key === 'ArrowLeft') {
             event.preventDefault();
             prevBtn.click();
@@ -94,7 +112,10 @@ export default async function decorate(block) {
         // A11y: Make carousel focusable
         featuredProductsWrapper.setAttribute('tabindex', '0');
         featuredProductsWrapper.setAttribute('role', 'region');
-        featuredProductsWrapper.setAttribute('aria-label', 'Featured Products Carousel');
+        featuredProductsWrapper.setAttribute(
+          'aria-label',
+          'Featured Products Carousel'
+        );
       }
     } else {
       const carouselNav = container.querySelector('.carousel-navigation');
@@ -115,7 +136,10 @@ export default async function decorate(block) {
 
   if (lastWrapper && featuredProductsWrapper) {
     const showMoreParagraph = lastWrapper.querySelector('p');
-    if (showMoreParagraph && showMoreParagraph.textContent.trim() === 'Show more') {
+    if (
+      showMoreParagraph &&
+      showMoreParagraph.textContent.trim() === 'Show more'
+    ) {
       const symbolSpan = document.createElement('span');
       symbolSpan.textContent = ' +';
       symbolSpan.style.color = '#006b46';
@@ -155,7 +179,7 @@ export default async function decorate(block) {
       showMoreParagraph.addEventListener('click', toggleShowMore);
 
       // A11y: Keyboard support for show more
-      showMoreParagraph.addEventListener('keydown', (event) => {
+      showMoreParagraph.addEventListener('keydown', event => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
           toggleShowMore();
@@ -175,20 +199,23 @@ export default async function decorate(block) {
       const linkText = anchorElement.textContent.trim();
       card.dataset.href = url;
 
-      // const divToHide = anchorElement.closest('div');
-      // if (divToHide) {
-      //   divToHide.classList.add('hidden-link-container');
-      // }
+      const divToHide = anchorElement.closest('div');
+      if (divToHide) {
+        divToHide.classList.add('hidden-link-container');
+      }
 
       card.classList.add('clickable-card');
 
       // A11y: Make card keyboard accessible
       card.setAttribute('tabindex', '0');
       card.setAttribute('role', 'button');
-      card.setAttribute('aria-label', `Navigate to ${linkText || 'product page'}`);
+      card.setAttribute(
+        'aria-label',
+        `Navigate to ${linkText || 'product page'}`
+      );
 
       // A11y: Keyboard navigation for cards
-      card.addEventListener('keydown', (event) => {
+      card.addEventListener('keydown', event => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
           window.location.href = url;
@@ -207,7 +234,7 @@ export default async function decorate(block) {
     }
   });
 
-  block.addEventListener('click', (event) => {
+  block.addEventListener('click', event => {
     const clickedCard = event.target.closest('.clickable-card');
 
     if (clickedCard && clickedCard.dataset.href) {
@@ -225,7 +252,10 @@ export default async function decorate(block) {
   // A11y: Add heading association
   const mainHeading = container.querySelector('#featured-products');
   if (mainHeading && featuredProductsWrapper) {
-    featuredProductsWrapper.setAttribute('aria-labelledby', 'featured-products');
+    featuredProductsWrapper.setAttribute(
+      'aria-labelledby',
+      'featured-products'
+    );
   }
 
   setupCarousel();
@@ -239,7 +269,7 @@ export default async function decorate(block) {
     }
 
     const products = [];
-    productCards.forEach((card) => {
+    productCards.forEach(card => {
       const title = card.querySelector('h2');
       const description = card.querySelector('p:not(.show-more)');
       const url = card.dataset.href;
