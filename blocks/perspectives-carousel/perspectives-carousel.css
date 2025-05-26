@@ -198,7 +198,6 @@
     align-items: center;
     flex-flow: row nowrap;
     justify-content: center;
-    gap: 10px;
 
     button {
       cursor: pointer;
@@ -210,6 +209,7 @@
       margin: 0;
       padding: 0;
       width: 8px;
+      margin: 0 5px;
     }
 
     button.active {

@@ -23,6 +23,7 @@ export default async function decorate(block) {
                             <div class="shape3"></div>`;
     const image = document.createElement('img');
     image.src = slide.img;
+    image.alt = `Slide ${i + 1} image`;
     imageBlock.append(shape, image);
 
     const bullets = document.createElement('div');
@@ -30,16 +31,16 @@ export default async function decorate(block) {
     bullets.innerHTML = `<div class="bullets">
             <button class="bullet active" data-index="1" data-slide="${
               i + 1
-            }"></button>
+            }" aria-label="Slide 1"></button>
             <button class="bullet" data-index="2" data-slide="${
               i + 1
-            }"></button>       
+            }" aria-label="Slide 2"></button>       
             <button class="bullet" data-index="3" data-slide="${
               i + 1
-            }"></button>       
+            }" aria-label="Slide 3"></button>       
             <button class="bullet" data-index="4" data-slide="${
               i + 1
-            }"></button>
+            }" aria-label="Slide 4"></button>
     </div>`;
 
     const textBlock = document.createElement('div');

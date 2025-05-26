@@ -6,6 +6,7 @@ export default async function decorate(block) {
     imgWrapper.classList.add('img-wrapper');
     const img = document.createElement('img');
     img.src = link.innerText;
+    img.alt = "Product image";
     imgWrapper.append(img);
     link.parentNode.replaceWith(imgWrapper);
 
