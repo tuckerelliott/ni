@@ -29,7 +29,7 @@ export default function decorate(block) {
         // Direct image embed with size parameters
         const optimizedUrl = `${
           url.split('?')[0]
-        }?fmt=webp-alpha&scl=1&fit=constrain&wid=1200&hei=630`;
+        }?fmt=webp-alpha`;
         container.innerHTML = `
           <img src="${optimizedUrl}" 
             class="scene7-image" 
