@@ -146,10 +146,25 @@ export function decorateCarousel() {
   }
 
   function setSlide(index) {
+    let bulletIndex;
+    if (index > slides.length - 2) {
+      bulletIndex = 1;
+    } else if (index <= 0) {
+      bulletIndex = 4;
+    } else bulletIndex = index;
+
     carousel.style.transition = 'transform 0.3s ease';
     carousel.style.transform = `translateX(-${slideWidth * index}px)`;
+
+    updateCounter(index);
+
+    bulletButtons.forEach((btn) => btn.classList.remove('active'));
+    bulletButtons.forEach((btn) => {
+      if (+btn.getAttribute('data-index') === bulletIndex) {
+        btn.classList.add('active');
+      }
+    });
     currentIndex = index;
-    updateCounter(currentIndex);
   }
 
   function goToNext() {
@@ -227,14 +242,7 @@ export function decorateCarousel() {
 
   function touchEnd(event) {
     if (event.target.classList.contains('bullet')) {
-      bulletButtons.forEach((btn) => btn.classList.remove('active'));
       const bulletIndex = +event.target.getAttribute('data-index');
-      bulletButtons.forEach((btn) => {
-        if (+btn.getAttribute('data-index') === bulletIndex) {
-          btn.classList.add('active');
-        }
-      });
-
       setSlide(bulletIndex);
       return;
     }
