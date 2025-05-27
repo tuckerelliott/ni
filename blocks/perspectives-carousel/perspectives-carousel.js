@@ -110,7 +110,6 @@ export function decorateCarousel() {
   const bulletButtons = document.querySelectorAll('.carousel-bullets button');
   let slides = Array.from(carousel.children);
   const totalCards = slides.length;
-  const slideWidth = slides[0].offsetWidth;
 
   let currentIndex = 1;
   let isDragging = false;
@@ -128,7 +127,7 @@ export function decorateCarousel() {
   slides = Array.from(carousel.children);
 
   // Set initial position
-  carousel.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+  carousel.style.transform = `translateX(-${slides[0].offsetWidth * currentIndex}px)`;
 
   function updateCounter(curr) {
     const counter = document.querySelector('.carousel-counter');
@@ -152,9 +151,10 @@ export function decorateCarousel() {
     } else if (index <= 0) {
       bulletIndex = 4;
     } else bulletIndex = index;
+    const currentSlideWidth = slides[0].offsetWidth;
 
     carousel.style.transition = 'transform 0.3s ease';
-    carousel.style.transform = `translateX(-${slideWidth * index}px)`;
+    carousel.style.transform = `translateX(-${currentSlideWidth * index}px)`;
 
     updateCounter(index);
 
@@ -168,22 +168,22 @@ export function decorateCarousel() {
   }
 
   function goToNext() {
-    if (currentIndex >= slides.length - 1) return;
     setSlide(currentIndex + 1);
   }
 
   function goToPrev() {
-    if (currentIndex <= 0) return;
     setSlide(currentIndex - 1);
   }
 
   carousel.addEventListener('transitionend', () => {
+    const currentSlideWidth = slides[0].offsetWidth;
+
     if (slides[currentIndex].isEqualNode(firstClone)) {
       requestAnimationFrame(() => {
         carousel.style.transition = 'none';
         currentIndex = 1;
         carousel.style.transform = `translateX(-${
-          slideWidth * currentIndex
+          currentSlideWidth * currentIndex
         }px)`;
         slides.forEach((slide) => slide.classList.remove('active'));
 
@@ -195,7 +195,7 @@ export function decorateCarousel() {
         carousel.style.transition = 'none';
         currentIndex = slides.length - 2;
         carousel.style.transform = `translateX(-${
-          slideWidth * currentIndex
+          currentSlideWidth * currentIndex
         }px)`;
         slides.forEach((slide) => slide.classList.remove('active'));
 
@@ -213,11 +213,10 @@ export function decorateCarousel() {
   // Drag functionality
   function touchStart() {
     return function (event) {
-      if (event.target.classList.contains('bullet')) {
+      if (event && event.target && event.target.classList.contains('bullet')) {
         return;
       }
 
-      isDragging = true;
       startX = event.type.includes('mouse')
         ? event.pageX
         : event.touches[0].clientX;
@@ -228,35 +227,34 @@ export function decorateCarousel() {
   }
 
   function touchMove(event) {
-    if (event.target.classList.contains('bullet')) {
+    if (event && event.target && event.target.classList.contains('bullet')) {
       return;
     }
 
-    if (!isDragging) return;
+    isDragging = true;
     const currentX = event.type.includes('mouse')
       ? event.pageX
       : event.touches[0].clientX;
     const diff = currentX - startX;
     currentTranslate = -currentIndex * carousel.offsetWidth + diff;
+    isDragging = false;
   }
 
   function touchEnd(event) {
-    if (event.target.classList.contains('bullet')) {
+    if (event && event.target && event.target.classList.contains('bullet')) {
       const bulletIndex = +event.target.getAttribute('data-index');
       setSlide(bulletIndex);
       return;
     }
 
     cancelAnimationFrame(animationID);
-    isDragging = false;
-    const movedBy = currentTranslate + currentIndex * carousel.offsetWidth;
+    const carouselWidth = carousel.offsetWidth;
+    const movedBy = currentTranslate + currentIndex * carouselWidth;
 
     if (movedBy < -50) {
       goToNext();
     } else if (movedBy > 50) {
       goToPrev();
-    } else {
-      setSlide(currentIndex);
     }
   }
 
@@ -281,8 +279,9 @@ export function decorateCarousel() {
   carousel.addEventListener('touchend', touchEnd);
 
   window.addEventListener('resize', () => {
+    const resizedCarouselWidth = carousel.offsetWidth;
     // Disable transition so resize snap is instant and smooth
     carousel.style.transition = 'none';
-    carousel.style.transform = `translateX(-${currentIndex * carousel.offsetWidth}px)`;
+    carousel.style.transform = `translateX(-${currentIndex * resizedCarouselWidth}px)`;
   });
 }
