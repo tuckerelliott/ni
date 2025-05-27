@@ -92,7 +92,7 @@
 
 .perspectives-carousel ul {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   touch-action: pan-y;
   transform-style: preserve-3d;
   list-style: none;
