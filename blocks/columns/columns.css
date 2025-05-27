@@ -92,8 +92,8 @@
     display: none;
   }
 
-  .test-and-measurement .columns.block.columns-2-cols > div h2 + p {
-    display: block;
+  .test-and-measurement .columns.block.columns-2-cols > div {
+    flex-direction: row-reverse;
   }
 
   .columns.block.columns-2-cols .columns-scene7-col h1 + p {
