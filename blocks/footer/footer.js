@@ -1,3 +1,4 @@
+/* stylelint-disable */
 import footerLinks from './footerData.js';
 
 /**

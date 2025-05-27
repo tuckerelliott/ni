@@ -18,7 +18,7 @@
 
   to {
     opacity: 1;
-    transform: translateX(0px);
+    transform: translateX(0);
   }
 }
 
@@ -84,6 +84,7 @@
   scroll-snap-type: none;
   scroll-behavior: smooth;
 }
+
 .carousel.dragging .card {
   user-select: none;
 }
@@ -91,9 +92,8 @@
 .perspectives-carousel ul {
   display: flex;
   align-items: center;
-  touch-action: pan-Y;
+  touch-action: pan-y;
   transform-style: preserve-3d;
-  transition: transform 0.3s ease;
   list-style: none;
   margin-top: 0;
   margin-bottom: 0;
@@ -104,10 +104,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-
   transition: transform cubic-bezier(0.165, 0.84, 0.44, 1);
-  /* width: 10920px; */
-  /* transform: translate3d(-2730px, 0px, 0px); */
 }
 
 .perspectives-carousel ul > li {
@@ -127,10 +124,6 @@
       flex-direction: column;
     }
   }
-
-  /* &.active {
-    opacity: 1;
-  } */
 
   .image-block {
     display: flex;
@@ -206,7 +199,6 @@
       border: 0;
       border-radius: 50%;
       height: 8px;
-      margin: 0;
       padding: 0;
       width: 8px;
       margin: 0 5px;
