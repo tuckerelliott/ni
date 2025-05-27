@@ -45,6 +45,7 @@ export default function decorate(block) {
 
       const linkAchors = col.querySelectorAll('.button-container a');
       linkAchors.forEach(
+        // eslint-disable-next-line no-return-assign
         (link) => (link.title = `Follow this link to ${link.innerText.toLowerCase()}`),
       );
     });
@@ -198,6 +199,7 @@ export default function decorate(block) {
       const MAX_ITEMS_MOBILE_INITIAL = 8;
       const DESKTOP_VIEWPORT_WIDTH = 1200;
 
+      // eslint-disable-next-line no-inner-declarations
       function manageItemVisibility(activeTabContent) {
         tabContents.forEach((content) => {
           const seeMoreBtn = content.querySelector('.ts-see-more');
@@ -274,6 +276,7 @@ export default function decorate(block) {
         }
       });
 
+      // eslint-disable-next-line no-inner-declarations
       function checkViewportAndApplyVisibility() {
         const activeTabContent = document.querySelector(
           '.ts-tab-content.active',

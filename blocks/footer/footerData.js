@@ -1,4 +1,4 @@
-export const footerLinks = {
+const footerLinks = {
   solutions: [
     {
       title: 'Academic & Research',
@@ -108,3 +108,5 @@ export const footerLinks = {
     },
   ],
 };
+
+export default footerLinks;

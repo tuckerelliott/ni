@@ -1,4 +1,4 @@
-export const sliderData = [
+const sliderData = [
   {
     img: 'https://ni.scene7.com/is/image/ni/GettyImages-1183755619_edited_284x409?scl=1&quot',
     heading: 'NI PERSPECTIVES',
@@ -36,3 +36,5 @@ export const sliderData = [
     linkHref: 'https://www.ni.com/en/perspectives/always-prepared-for-an-uncertain-future.html',
   },
 ];
+
+export default sliderData;

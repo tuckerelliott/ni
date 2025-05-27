@@ -1,4 +1,4 @@
-import { footerLinks } from './footerData.js';
+import footerLinks from './footerData.js';
 
 /**
  * loads and decorates the footer

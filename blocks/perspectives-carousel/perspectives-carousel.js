@@ -1,4 +1,4 @@
-import { sliderData } from './carouselData.js';
+import sliderData from './carouselData.js';
 
 export default async function decorate(block) {
   const wrapper = document.createElement('div');
@@ -73,7 +73,7 @@ export default async function decorate(block) {
     slides.push(slideWrapper);
   });
 
-  slides.forEach((row, i) => {
+  slides.forEach((row) => {
     const li = document.createElement('li');
     li.className = 'card';
     while (row.firstElementChild) li.append(row.firstElementChild);
@@ -132,6 +132,7 @@ export function decorateCarousel() {
 
   function updateCounter(curr) {
     const counter = document.querySelector('.carousel-counter');
+    // eslint-disable-next-line no-nested-ternary
     const displayIndex = curr === 0 ? totalCards : curr > totalCards ? 1 : curr;
 
     counter.innerHTML = `<span class="current-index">${displayIndex
@@ -205,6 +206,7 @@ export function decorateCarousel() {
       startX = event.type.includes('mouse')
         ? event.pageX
         : event.touches[0].clientX;
+      // eslint-disable-next-line no-use-before-define
       animationID = requestAnimationFrame(animation);
       carousel.style.transition = 'none';
     };
