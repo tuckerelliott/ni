@@ -2,4 +2,3 @@ mountpoints:
   /:
     url: https://content.da.live/tuckerelliott/ni/
     type: markup
-    
