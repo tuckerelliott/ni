@@ -12,11 +12,13 @@ export default async function decorate(block) {
 
     const cardTitle = child.querySelector('h2');
     const cardWrapperLink = child.querySelector('h2 > a');
-    cardTitle.innerHTML = cardWrapperLink.innerText;
-    const hiddenLinkContainer = document.createElement('div');
-    hiddenLinkContainer.classList.add('hidden-link-container');
-    hiddenLinkContainer.innerHTML = `<p><a href="${cardWrapperLink.href}" title="${cardWrapperLink.href}">${cardWrapperLink.href}</a></p>`;
-    child.querySelector(':scope > div').prepend(hiddenLinkContainer);
+    if (cardWrapperLink) {
+      cardTitle.innerHTML = cardWrapperLink.innerText;
+      const hiddenLinkContainer = document.createElement('div');
+      hiddenLinkContainer.classList.add('hidden-link-container');
+      hiddenLinkContainer.innerHTML = `<p><a href="${cardWrapperLink.href}" title="${cardWrapperLink.href}">${cardWrapperLink.href}</a></p>`;
+      child.querySelector(':scope > div').prepend(hiddenLinkContainer);
+    }
   });
 
   const container = block.parentElement.parentElement;

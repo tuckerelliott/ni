@@ -136,9 +136,11 @@ export default async function decorate(block) {
   const logo = document.createElement('img');
   logo.src = navBrand.innerText;
   logo.alt = 'NI logo';
-  brandAnchor.innerText = '';
-  brandAnchor.append(logo);
-  brandAnchor.href = '#';
+  if (brandAnchor) {
+    brandAnchor.innerText = '';
+    brandAnchor.append(logo);
+    brandAnchor.href = '#';
+  }
   if (brandLink) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
